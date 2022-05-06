@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃蛇</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div class="set">
+        <label for="grid">游戏单元格：</label>
+        <select name="grid" id="grid">
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+        </select>
+        <label for="mode">难度选择：</label>
+        <select name="mode" id="mode">
+            <option value="easy">简单</option>
+            <option value="mid">中等</option>
+            <option value="hard">困难</option>
+        </select>
+        <label for="modeByCustom">自定义难度：</label>
+        <input type="text" id="modeByCustom" placeholder="请输入1-20内的数字" name="">
+    </div>
+    <div class="container" id="app"></div>
+    <script src="./js/main.js"></script>
+    <script>
+        let dot,speed;
+        const app = document.querySelector('#app');
+        document.querySelector('#grid').addEventListener('change', (e) => {
+            dot = e.target.value
+            snake(app, dot);
+        });
+        document.querySelector('#mode').addEventListener('change', (e) => {
+            dot || (dot = 30);
+            switch (e.target.value) {
+                case 'easy':
+                    speed = 2
+                    break;
+                case 'mid':
+                    speed = 5
+                    break;
+                case 'hard':
+                    speed = 7
+                    break;
+            }
+            custom.value ='';
+            snake(app, dot, speed);
+        });;
+        const custom = document.querySelector('#modeByCustom')
+        custom.addEventListener('change', (e) => {
+            let speed;
+            dot || (dot = 30);
+            if (e.target.value < 0 || e.target.value > 20 || isNaN(e.target.value)){
+                e.target.value ='';
+                snake(app);
+                return
+            } 
+            speed = Number(e.target.value)
+            snake(app, dot, speed);
+        });
+
+        snake(app);
+    </script>
+</body>
+
+</html>
