@@ -33,7 +33,7 @@
         const app = document.querySelector('#app');
         document.querySelector('#grid').addEventListener('change', (e) => {
             dot = e.target.value
-            snake(app, dot);
+            snake(app, dot,speed);
         });
         document.querySelector('#mode').addEventListener('change', (e) => {
             dot || (dot = 30);
